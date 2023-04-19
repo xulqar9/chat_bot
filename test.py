@@ -18,13 +18,10 @@ from pydub.playback import play
 openai.api_key = "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"
 
 class SpeechRecognizer:
-    """A class to recognize speech from microphone input."""
-
     def __init__(self):
         self.recognizer = sr.Recognizer()
 
     def recognize_speech(self):
-        """Listen to the microphone and return the recognized text."""
         with sr.Microphone() as source:
             print("Listening...")
             self.recognizer.adjust_for_ambient_noise(source)
@@ -82,10 +79,10 @@ if __name__ == "__main__":
     speech_recognizer = SpeechRecognizer()
     tts = TextToSpeech()
 
-    script_path = os.path.dirname(os.path.realpath(__file__)) # path of this script
-    roles_file  = os.path.join(script_path, 'roles.json') # path of the json file, containing the roles
+    script_path = os.path.dirname(os.path.realpath(__file__)) 
+    roles_file  = os.path.join(script_path, 'roles.json') 
     with open(roles_file, 'r') as file:
-        roles_data = json.load(file) # roles_data is now a dictionary
+        roles_data = json.load(file) 
 
     print("Available roles:")
     for role in roles_data:
