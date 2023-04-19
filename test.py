@@ -7,14 +7,6 @@ from io import BytesIO
 from pydub import AudioSegment
 from pydub.playback import play
 
-import os
-import openai
-import speech_recognition as sr
-from gtts import gTTS
-from io import BytesIO
-from pydub import AudioSegment
-from pydub.playback import play
-
 openai.api_key = "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"
 
 class SpeechRecognizer:
