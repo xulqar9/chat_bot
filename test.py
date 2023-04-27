@@ -7,7 +7,7 @@ from elevenlabs import generate, play, set_api_key ,voices
 
 
 openai.api_key = "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"
-set_api_key("c2eec6c0f165617aa2c3e87f06c6bc10")
+set_api_key("408b5dac61855f58fbadd1e24910da6e")
 
 class SpeechRecognizer:
     """A class to recognize speech from microphone input."""
@@ -72,7 +72,7 @@ class ChatBot:
 
 
 if __name__ == "__main__":
-    #print(voices("c2eec6c0f165617aa2c3e87f06c6bc10"))
+    #print(voices("408b5dac61855f58fbadd1e24910da6e"))
     speech_recognizer = SpeechRecognizer()
     
 
