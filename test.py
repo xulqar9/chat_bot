@@ -2,22 +2,26 @@ import os
 import json
 import openai
 import speech_recognition as sr
-from gtts import gTTS
-from io import BytesIO
-from pydub import AudioSegment
 from pydub.playback import play
+from elevenlabs import generate, play, set_api_key ,voices
 
-openai.api_key = "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"
+
+openai.api_key = "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"
+set_api_key("c2eec6c0f165617aa2c3e87f06c6bc10")
 
 class SpeechRecognizer:
+    """A class to recognize speech from microphone input."""
+
     def __init__(self):
         self.recognizer = sr.Recognizer()
 
     def recognize_speech(self):
+        """Listen to the microphone and return the recognized text."""
         with sr.Microphone() as source:
             print("Listening...")
             self.recognizer.adjust_for_ambient_noise(source)
             audio = self.recognizer.listen(source)
+            
         try:
             print("Recognizing...")
             text = self.recognizer.recognize_google(audio)
@@ -30,18 +34,18 @@ class SpeechRecognizer:
             return None
 
 class TextToSpeech:
-    def __init__(self, language="en", slow=False):
+    def __init__(self, voice , language="en", slow=False):
         self.language = language
         self.slow = slow
+        self.voice = voice
 
     def speak(self, text):
-        """Speak the given text."""
-        speech = gTTS(text=text, lang=self.language, slow=self.slow)
-        audio_bytes = BytesIO()
-        speech.write_to_fp(audio_bytes)
-        audio_bytes.seek(0)
-        audio_segment = AudioSegment.from_file(audio_bytes, format="mp3")
-        play(audio_segment)
+        audio = generate(
+        text=text,
+        voice=self.voice
+        )
+        
+        play(audio)
 
 class ChatBot:
     def __init__(self, role):
@@ -68,13 +72,14 @@ class ChatBot:
 
 
 if __name__ == "__main__":
+    #print(voices("c2eec6c0f165617aa2c3e87f06c6bc10"))
     speech_recognizer = SpeechRecognizer()
-    tts = TextToSpeech()
+    
 
-    script_path = os.path.dirname(os.path.realpath(__file__)) 
-    roles_file  = os.path.join(script_path, 'roles.json') 
+    script_path = os.path.dirname(os.path.realpath(__file__)) # path of this script
+    roles_file  = os.path.join(script_path, 'roles.json') # path of the json file, containing the roles
     with open(roles_file, 'r') as file:
-        roles_data = json.load(file) 
+        roles_data = json.load(file) # roles_data is now a dictionary
 
     print("Available roles:")
     for role in roles_data:
@@ -85,6 +90,31 @@ if __name__ == "__main__":
         if bot_name in roles_data:
             role = roles_data[bot_name]
             bot = ChatBot(role)
+            if bot_name == "crackhead":
+                voice_role = "crackhead"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "employee-kaufland":
+                voice_role = "Domi"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "Markus":
+                voice_role = "Markus"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "crusader":
+                voice_role = "Antoni"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "mike-tyson":
+                voice_role = "Adam"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "batman":
+                voice_role = "Domi"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "batman-rogue":
+                voice_role = "Antoni"
+                voice = TextToSpeech(voice = voice_role)
+            elif bot_name == "eminem":
+                voice_role = "Adam"
+                voice = TextToSpeech(voice = voice_role)
+            tts = TextToSpeech(voice=voice_role)
             break
         else:
             print("Invalid role. Please try again.")
