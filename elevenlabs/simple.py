@@ -20,7 +20,7 @@ VOICES_CACHE = [
         voice_id="21m00Tcm4TlvDq8ikWAM",
         name="Rachel",
         category="cloned",
-        settings=VoiceSettings(),
+        settings=VoiceSettings(stability=0.1, similarity_boost=0.75),
     ),
     Voice(
         voice_id="7LKZBPzbjJWkNVb2bEbL",
