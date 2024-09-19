@@ -9,8 +9,8 @@ from tkinter import messagebox
 import speech_recognition as sr
 from elevenlabs import generate,play, set_api_key, voices
 
-openai.api_key = "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"
-set_api_key("c2eec6c0f165617aa2c3e87f06c6bc10")
+openai.api_key = " OPENAIKEY "
+set_api_key("elevenlabskey")
 
 
 class SpeechRecognizer:
@@ -183,7 +183,7 @@ class ChatbotApp(tk.Tk):
 
 
 if __name__ == "__main__":
-    voices("c2eec6c0f165617aa2c3e87f06c6bc10")
+    voices("elevenlabskey")
     script_path = os.path.dirname(os.path.realpath(__file__))
     roles_file = os.path.join(script_path, 'roles.json')
     with open(roles_file, 'r') as file:
